@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace AppBank {
     internal class Operations {
         List<User> users;
+        User userName;
        public void newAccount() {
             bool confirm;
             Console.WriteLine("//////////Central bank///////////" + "\nNew Account!" + "\n(1) Fist name:");
@@ -37,6 +38,15 @@ namespace AppBank {
         private bool cpfVerification(int newCpf) {
             User userTeste = users.Find(User => User.Cpf == newCpf);
             if(userTeste != null) { return true; }
+            return false;
+        }
+        public bool login(int numberAccount, int password) {
+            User userNumberAccount = users.Find(User => User.NumberAccount == numberAccount);
+            User userPassword = users.Find(User => User.Password == password);
+            if(userNumberAccount != null) {
+                if(userPassword != null) { return true; }
+                return false;
+            }
             return false;
         }
     }
