@@ -18,7 +18,10 @@ namespace AppBank {
             get { return _balance; }
             private set { _balance += value; }
         }
-
+        public int Cpf {
+            get { return _cpf; }
+            set { _cpf = value; }
+        }
         public User(string fistName, string lastName, int cpf, int phoneNumber, int password) {
             _fistName = fistName;
             _lastName = lastName;

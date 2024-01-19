@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppBank {
     internal class Operations {
+        List<User> users;
        public void newAccount() {
             bool confirm;
             Console.WriteLine("//////////Central bank///////////" + "\nNew Account!" + "\n(1) Fist name:");
@@ -21,16 +22,22 @@ namespace AppBank {
             do {
                 Console.WriteLine("Confirm password:");
                 int newPassword2 = int.Parse(Console.ReadLine());
-                confirm = confirmPassword(newPassword, newPassword2);
+                confirm = passwordConfirmation(newPassword, newPassword2);
                 if (confirm != true) {
                     Console.WriteLine("Different passwords!!!");
                 }
             } while (confirm!=true);
             User newUser = new User(newFistName, newLastName, newCpf, newPhoneNumber, newPassword);
+            users.Add(newUser);
             Console.WriteLine("New account created successfully!!!");
         }
-        private bool confirmPassword(int newPassword, int newPassword2) {
+        private bool passwordConfirmation(int newPassword, int newPassword2) {
             return newPassword == newPassword2;
+        }
+        private bool cpfVerification(int newCpf) {
+            User userTeste = users.Find(User => User.Cpf == newCpf);
+            if(userTeste != null) { return true; }
+            return false;
         }
     }
 }
