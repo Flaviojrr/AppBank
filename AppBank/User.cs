@@ -28,6 +28,9 @@ namespace AppBank {
         public int Password {
             get { return _password; }
         }
+        public string FistName {
+            get { return _fistName; }
+        }
         public User(string fistName, string lastName, int cpf, int phoneNumber, int password) {
             _fistName = fistName;
             _lastName = lastName;
