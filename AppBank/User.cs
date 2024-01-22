@@ -11,7 +11,7 @@ namespace AppBank {
         private int _cpf;
         private int _phoneNumber;
         private int _password;
-        private float _balance;
+        private float _balance=20F;
         private int _numberAccount;
         Random rnd = new Random();
         public float Balance {
@@ -39,6 +39,25 @@ namespace AppBank {
             _password = password;
             _numberAccount = rnd.Next(10000);
         }
-
+        public void deposit(float deposit) {
+            Balance += deposit;
+        }
+        public bool transfer(float transfer) {
+            if(Balance<=0) return false;
+            Balance -= transfer;
+            return true;
+        }
+        public bool payment(float amount) {
+            if (Balance < amount) return false;
+            Balance -= amount;
+            return true;
+        }
+        public override string ToString() {
+            return "Fist name: " + _fistName
+                + "\nLast name: " + _lastName
+                + "\nNumber account: " + +NumberAccount
+                + "\nCPF: " + _cpf
+                + "\nPhone number: " + _phoneNumber;
+        }
     }
 }

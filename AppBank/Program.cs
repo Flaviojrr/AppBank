@@ -1,21 +1,28 @@
 ﻿namespace AppBank {
     internal class Program {
-        static Operations teste = new Operations();
+        static Operations newOperation = new Operations();
         static void Main(string[] args) {
-            Console.WriteLine("Hello, World!");
             run();
         }
         private static void run() {
-            Console.WriteLine("////////// Central Bank ///////////"+"(1) Login"+"(2) Create a new account");
-            int op = int.Parse(Console.ReadLine());
+            int op;
+            do {
+                Console.WriteLine("////////// Central Bank /////////// \n(1) Login \n(2) Create a new account \n(3) Exit");
+                op = int.Parse(Console.ReadLine());
                 switch (op) {
                     case 1:
-                        teste.Login(1, 1);
+                        Console.WriteLine("/////////// Login ////////// \n(1) Number Account:");
+                        int loginNumberAccount = int.Parse(Console.ReadLine());
+                        Console.WriteLine("(2) Password: ");
+                        int loginPassword=int.Parse(Console.ReadLine());
+                        newOperation.Login(loginNumberAccount, loginPassword);
                         break;
                     case 2:
-                        teste.newAccount();
+                        newOperation.newAccount();
                         break;
                 }
+            } while(op!=3);
+            
         }
     }
 }
