@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
@@ -56,16 +57,18 @@ namespace AppBank {
             return null;
         }
         private string CheckBalance(User user) {
-            return "Balance: " + user.Balance;
+            return "Balance: R$ " + user.Balance.ToString("F2");
         }
         private void BankTransfer(User userAccountMadeTheDeposit, int UserAccountNumberForTransfer, float deposit) {
             User userForTransfer = users.Find(uft => uft.NumberAccount == UserAccountNumberForTransfer);
             if (userForTransfer != null) {
-                userAccountMadeTheDeposit.transfer(deposit);
+                Console.WriteLine(userAccountMadeTheDeposit.transfer(deposit));
                 userForTransfer.deposit(deposit);
-                Console.WriteLine("Bank transfer completed successfully\n" + CheckBalance(userAccountMadeTheDeposit));
+                Console.WriteLine(CheckBalance(userAccountMadeTheDeposit));
             }
-            Console.WriteLine("Bank transfer not completed");
+            else {
+                Console.WriteLine("Bank transfer not completed");
+            }
         }
         private void Payments(User userAccountMadeThePayment, int paymentAmount) {
             if (userAccountMadeThePayment.payment(paymentAmount)) {
@@ -77,11 +80,11 @@ namespace AppBank {
             Console.WriteLine("////////// Central Bank ////////// \nWelcome " + verifiedUser.FistName + "!!!");
             int op;
             do {
-                Console.WriteLine("(1)Check balance \n(2)Bank transfer \n(3)Payments \n(4)Exit");
+                Console.WriteLine("(1)Check balance \n(2)Bank transfer \n(3)Payments \n(4)Info \n(5)Exit");
                 op = int.Parse(Console.ReadLine());
                 switch (op) {
                     case 1:
-                        CheckBalance(verifiedUser);
+                        Console.WriteLine(CheckBalance(verifiedUser));
                         break;
                     case 2:
                         Console.WriteLine("Account for deposit:");
@@ -96,8 +99,11 @@ namespace AppBank {
                         Console.WriteLine("Amount for invoice:");
                         float amountInvoice = float.Parse(Console.ReadLine());
                         break;
+                    case 4:
+                        Console.WriteLine(verifiedUser.ToString());
+                        break;
                 }
-            } while (op != 4);
+            } while (op != 5);
         }
 
     }

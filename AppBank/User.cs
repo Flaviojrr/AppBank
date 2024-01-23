@@ -16,7 +16,7 @@ namespace AppBank {
         Random rnd = new Random();
         public float Balance {
             get { return _balance; }
-            private set { _balance += value; }
+            set { _balance = value; }
         }
         public int Cpf {
             get { return _cpf; }
@@ -42,10 +42,10 @@ namespace AppBank {
         public void deposit(float deposit) {
             Balance += deposit;
         }
-        public bool transfer(float transfer) {
-            if(Balance<=0) return false;
-            Balance -= transfer;
-            return true;
+        public string transfer(float transfer) {
+            if(Balance<=0) return "Insufficient balance";
+            Balance -=transfer;
+            return "Bank transfer completed";
         }
         public bool payment(float amount) {
             if (Balance < amount) return false;
